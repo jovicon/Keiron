@@ -39,6 +39,26 @@
                             </div>
                         </div>
 
+                        {{-- ENABLING -- ADMIN OR BASIC USER --}}
+                        <div class="form-group row">
+                            <label for="user_type" class="col-md-4 col-form-label text-md-right">Tipo de usuario</label>
+
+                            <div class="col-md-6">
+                                <input id="user_type_admin" type="radio" class="" name="user_type" value="admin" required>
+                                <label for="user_type_admin">Admin</label>
+
+                                <br>
+                                <input id="user_type_user" type="radio" class="" name="user_type" value="user" required>
+                                <label for="user_type_user">User</label>
+
+                                @if ($errors->has('user_type'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('user_type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 

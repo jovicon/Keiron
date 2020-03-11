@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\User_type;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,6 +52,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'user_type' => ['required', 'string', 'max:255'], // verificando campo seleccionado para perfil
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -63,10 +65,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // en base al perfil seleccionado, buscamos un perfil
+        $user_type = User_type::where('name',$data['user_type'])->first();
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'user_type_id' => $user_type->id
         ]);
     }
 }
