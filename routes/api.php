@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// ticket simple API
+Route::post('ticket/create', 'TicketController@createTicket'); // create ticket
+Route::post('ticket/update', 'TicketController@updateTicket'); // update ticket
+Route::post('ticket/delete', 'TicketController@deleteTicket'); // delete ticket

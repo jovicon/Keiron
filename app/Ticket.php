@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class Ticket extends Model
 {
     /**
@@ -14,4 +16,8 @@ class Ticket extends Model
     protected $fillable = [
         'user_id', 'set_ticket'
     ];
+
+    public function user() {
+        return User::where('id',$this->user_id)->first();
+    }
 }
